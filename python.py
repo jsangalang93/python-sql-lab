@@ -7,18 +7,20 @@ cursor = connection.cursor()
 #----------------------------------------GET------------------------------------------------------------------------------
 
 #(EMPLOYEES)
-cursor.execute("SELECT * FROM employees")
-print(cursor.fetchall())
+def read_employee():
+    cursor.execute("SELECT * FROM employees")
+    print(cursor.fetchall())
 
-#(COMPANIES)
-cursor.execute("SELECT * FROM companies")
-print(cursor.fetchall())
+#(COMPANIES
+def read_company():
+    cursor.execute("SELECT * FROM companies")
+    print(cursor.fetchall())
 
 #----------------------------------------CREATE------------------------------------------------------------------------------
 
 #(EMPLOYEES)
 
-def create_employees():
+def create_employee():
     name = input("Enter Employee Name: ")
     company_id = input ("Enter Company ID: ")
     cursor.execute("INSERT INTO employees (name, company_id) VALUES (%s, %s)", (name, company_id))
@@ -69,6 +71,46 @@ def delete_company():
     connection.commit()
 print("Company Deleted Successfully.")
 
+
+#----------------------------------------MENU------------------------------------------------------------------------------
+
+while True:
+    print('CRM MENU')
+    
+    print('1. Create Employee')
+    print('2. Create Company')
+    print('3. Read Employee')
+    print('4. Read Company')
+    print('5. Update Employee')
+    print('6. Update Company')
+    print('7. Delete Employee')
+    print('8. Delete Company')
+    print('9. Exit')
+    
+    choice = input("Enter your choice (1-9): ")
+    if choice == '1':
+        create_employee()
+    elif choice == '2':
+        create_company()
+    elif choice == '3':
+        read_employee()
+    elif choice == '4':
+        read_company()
+    elif choice == '5':
+        update_employee()
+    elif choice == '6':
+        update_company()
+    elif choice == '7':
+        delete_employee()
+    elif choice == '8':
+        delete_company()
+    elif choice == '9':
+        break
+    else:
+        print("Invalid Choice. Please select a valid option.")
+
+
+        
 
 cursor.close()
 connection.close() 
