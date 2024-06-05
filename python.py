@@ -25,15 +25,15 @@ def create_employee():
     company_id = input ("Enter Company ID: ")
     cursor.execute("INSERT INTO employees (name, company_id) VALUES (%s, %s)", (name, company_id))
     connection.commit()
-print("Employee has been created successfully.")
+    print("Employee has been created successfully.")
 
 #(COMPANIES)
 
 def create_company():
     name = input("Enter Company Name: ")
-    cursor.execute("INSERT INTO companies (name) VALUES (%s)", (name))
+    cursor.execute("INSERT INTO companies (name) VALUES (%s)", (name,))
     connection.commit()
-print("Company has been created successfully.")
+    print("Company has been created successfully.")
 
 #----------------------------------------UPDATE------------------------------------------------------------------------------
 
@@ -42,34 +42,34 @@ def update_employee():
     employee_id = input("Enter Employee ID: ")
     new_name = input("Enter Updated Employee Name: ")
     new_company_id = input ("Enter Updated Company ID: ")
-    cursor.execute("UPDATE employees SET name = %s, company_id = %s WHERE id = %s", (new_name, new_company_id))
+    cursor.execute("UPDATE employees SET name = %s, company_id = %s WHERE id = %s", (new_name, new_company_id, employee_id))
     connection.commit()
-print("Employee Updated Successfully.")
+    print("Employee Updated Successfully.")
 
 #(COMPANIES)
 def update_company():
-    name = input ("Enter Company Name")
+    company_id = input("Enter Company ID: ")
     new_name = input("Enter New Company Name: ")
-    cursor.execute("INSERT INTO companies (name) VALUES (%s)", (name))
-    cursor.execute("UPDATE companies SET name = %s WHERE id = %s", (new_name))
+    # cursor.execute("INSERT INTO companies (name) VALUES (%s)", (name,))
+    cursor.execute("UPDATE companies SET name = %s WHERE id = %s", (new_name, company_id))
     connection.commit()
-print("Company Updated Successfully.")
+    print("Company Updated Successfully.")
 
 #----------------------------------------DELETE------------------------------------------------------------------------------
 
 #(EMPLOYEES)
 def delete_employee():
     employee_id = input ("Enter Employee ID you wish to delete: ")
-    cursor.execute('DELETE FROM employees WHERE id = %s', [])
+    cursor.execute('DELETE FROM employees WHERE id = %s', (employee_id,))
     connection.commit()
-print("Employee Deleted Successfully.")
+    print("Employee Deleted Successfully.")
 
 #(COMPANIES)
 def delete_company():
     company_id = input ("Enter Company ID you wish to delete: ")
-    cursor.execute('DELETE FROM companies WHERE id = %s', [])
+    cursor.execute('DELETE FROM companies WHERE id = %s', (company_id,))
     connection.commit()
-print("Company Deleted Successfully.")
+    print("Company Deleted Successfully.")
 
 
 #----------------------------------------MENU------------------------------------------------------------------------------
@@ -113,4 +113,4 @@ while True:
         
 
 cursor.close()
-connection.close() 
+connection.close()
